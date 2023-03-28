@@ -1,0 +1,586 @@
+---
+title: "Machine Learning Regression Model Report - FTIR (Chicken Burger)"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# k-Nearest Neighbours for Total Viable Counts
+
+```{r message=FALSE, warning=FALSE}
+
+model_knn_TVC <- readRDS("models/CB/FTIR/model_knn_TVC.rds")
+print(model_knn_TVC)
+```
+
+# Total Viable Counts distribution - k-Nearest Neighbours
+
+```{r echo=FALSE}
+tested_knn_TVC<-readRDS("models/CB/FTIR/tested_knn_TVC.rds")
+RMSE_knn_TVC <- readRDS("models/CB/FTIR/RMSE_knn_TVC.rds")
+accuracy_knn_TVC <- readRDS("models/CB/FTIR/accuracy_knn_TVC.rds")
+predicted_knn_TVC <- readRDS("models/CB/FTIR/predicted_knn_TVC.rds")
+
+plot(predicted_knn_TVC,tested_knn_TVC,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts",col = "blue", 
+     main=paste("k-Nearest Neighbours \nRMSE:",round(RMSE_knn_TVC,digits = 2),"\nAccuracy :",round(accuracy_knn_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+```
+
+# Linear Model for Total Viable Counts
+
+```{r message=FALSE, warning=FALSE}
+model_LM_TVC <- readRDS("models/CB/FTIR/model_LM_TVC.rds")
+print(model_LM_TVC)
+
+```
+
+# Total Viable Counts distribution - Linear Regression
+
+```{r echo=FALSE}
+tested_LM_TVC<-readRDS("models/CB/FTIR/tested_LM_TVC.rds")
+RMSE_LM_TVC<-readRDS("models/CB/FTIR/RMSE_LM_TVC.rds")
+accuracy_LM_TVC<-readRDS("models/CB/FTIR/accuracy_LM_TVC.rds")
+predicted_LM_TVC<-readRDS("models/CB/FTIR/predicted_LM_TVC.rds")
+
+plot(predicted_LM_TVC, tested_LM_TVC,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Linear Regression \nRMSE:",round(RMSE_LM_TVC,digits = 2),"\nAccuracy:",round(accuracy_LM_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Random Forest for Total Viable Counts
+
+```{r message=FALSE, warning=FALSE}
+model_RF_TVC <- readRDS("models/CB/FTIR/model_RF_TVC.rds")
+print(model_RF_TVC)
+
+```
+
+# Total Viable Counts distribution - Random Forests
+
+```{r echo=FALSE}
+
+tested_RF_TVC<-readRDS("models/CB/FTIR/tested_LM_TVC.rds")
+RMSE_RF_TVC<-readRDS("models/CB/FTIR/RMSE_RF_TVC.rds")
+accuracy_RF_TVC<-readRDS("models/CB/FTIR/accuracy_RF_TVC.rds")
+predicted_RF_TVC<-readRDS("models/CB/FTIR/predicted_RF_TVC.rds")
+
+plot(predicted_RF_TVC,tested_RF_TVC,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts",col="blue", main=paste("Random Forests \nRMSE:",round(RMSE_RF_TVC,digits = 2),"\nAccuracy :",round(accuracy_RF_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Polynomial Kernel for Total Viable Counts
+
+```{r message = FALSE, warning = FALSE}
+model_SVMP_TVC <- readRDS("models/CB/FTIR/model_SVMP_TVC.rds")
+print(model_SVMP_TVC)
+
+```
+
+# Total Viable Counts distribution - Support Vector Machines with Polynomial Kernel
+
+```{r echo=FALSE}
+tested_SVMP_TVC<-readRDS("models/CB/FTIR/tested_SVMP_TVC.rds")
+RMSE_SVMP_TVC<-readRDS("models/CB/FTIR/RMSE_SVMP_TVC.rds")
+accuracy_SVMP_TVC<-readRDS("models/CB/FTIR/accuracy_SVMP_TVC.rds")
+predicted_SVMP_TVC<-readRDS("models/CB/FTIR/predicted_SVMP_TVC.rds")
+
+plot(predicted_SVMP_TVC,tested_SVMP_TVC,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Polynomial Kernel \nRMSE:",round(RMSE_SVMP_TVC,digits = 2)," \nAccuracy :",round(accuracy_SVMP_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Radial Basis Function Kernel for Total Viable Counts
+
+```{r message = FALSE, warning = FALSE}
+model_SVMR_TVC <-readRDS("models/CB/FTIR/model_SVMR_TVC.rds")
+print(model_SVMR_TVC)
+
+```
+
+# Total Viable Counts distribution - Support Vector Machines with Radial Basis Function Kernel
+
+```{r echo=FALSE}
+tested_SVMR_TVC<-readRDS("models/CB/FTIR/tested_SVMR_TVC.rds")
+RMSE_SVMR_TVC<-readRDS("models/CB/FTIR/RMSE_SVMR_TVC.rds")
+accuracy_SVMR_TVC<-readRDS("models/CB/FTIR/accuracy_SVMR_TVC.rds")
+predicted_SVMR_TVC<-readRDS("models/CB/FTIR/predicted_SVMR_TVC.rds")
+
+plot(predicted_SVMR_TVC,tested_SVMR_TVC,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Radial Basis Function Kernel \nRMSE:",round(RMSE_SVMR_TVC,digits = 2)," \nAccuracy :",round(accuracy_SVMR_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Linear Kernel for Total Viable Counts
+
+```{r message = FALSE, warning = FALSE}
+model_SVMLM_TVC <- readRDS("models/CB/FTIR/model_SVMLM_TVC.rds")
+print(model_SVMLM_TVC)
+
+```
+
+# Total Viable Counts distribution - Support Vector Machines with Linear Kernel
+
+```{r echo=FALSE}
+tested_SVMLM_TVC<-readRDS("models/CB/FTIR/tested_SVMLM_TVC.rds")
+RMSE_SVMLM_TVC<-readRDS("models/CB/FTIR/RMSE_SVMLM_TVC.rds")
+accuracy_SVMLM_TVC<-readRDS("models/CB/FTIR/accuracy_SVMLM_TVC.rds")
+predicted_SVMLM_TVC<-readRDS("models/CB/FTIR/predicted_SVMLM_TVC.rds")
+
+plot(predicted_SVMLM_TVC,tested_SVMLM_TVC, xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Linear Kernel \nRMSE:",round(RMSE_SVMLM_TVC,digits = 2), "\nAccuracy:",round(accuracy_SVMLM_TVC,digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Linear Regression for Pseudomonas count 
+
+```{r message = FALSE, warning = FALSE}
+model_LM_PS <- readRDS("models/CB/FTIR/model_LM_PS.rds")
+print(model_LM_PS)
+
+```
+
+# Pseudomonas count distribution - Linear Regression
+
+```{r echo=FALSE}
+tested_LM_PS<-readRDS("models/CB/FTIR/tested_LM_PS.rds")
+RMSE_LM_PS<-readRDS("models/CB/FTIR/RMSE_LM_PS.rds")
+accuracy_LM_PS<-readRDS("models/CB/FTIR/accuracy_LM_PS.rds")
+predicted_LM_PS<-readRDS("models/CB/FTIR/predicted_LM_PS.rds")
+
+plot(predicted_LM_PS, tested_LM_PS,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Linear Regression \nRMSE:", round(RMSE_LM_PS,digits = 2),"\nAccuracy :",round(accuracy_LM_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# k-Nearest Neighbors for Pseudomonas count 
+
+```{r message = FALSE, warning = FALSE}
+model_knn_PS <- readRDS("models/CB/FTIR/model_knn_PS.rds")
+print(model_knn_PS)
+
+```
+
+# Pseudomonas count distribution - k-Nearest Neighbors
+
+```{r echo=FALSE}
+tested_knn_PS<-readRDS("models/CB/FTIR/tested_knn_PS.rds")
+RMSE_knn_PS<-readRDS("models/CB/FTIR/RMSE_knn_PS.rds")
+accuracy_knn_PS<-readRDS("models/CB/FTIR/accuracy_knn_PS.rds")
+predicted_knn_PS<-readRDS("models/CB/FTIR/predicted_knn_PS.rds")
+
+plot(predicted_knn_PS, tested_knn_PS,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("k-Nearest Neighbors \nRMSE:",round(RMSE_knn_PS,digits = 2),"\nAccuracy :",round(accuracy_knn_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Random Forests for Pseudomonas count  
+
+```{r message = FALSE, warning = FALSE}
+model_RF_PS <- readRDS("models/CB/FTIR/model_RF_PS.rds")
+print(model_RF_PS)
+
+```
+
+# Pseudomonas count distribution - Random Forests
+
+```{r echo=FALSE}
+tested_RF_PS<-readRDS("models/CB/FTIR/tested_RF_PS.rds")
+RMSE_RF_PS<-readRDS("models/CB/FTIR/RMSE_RF_PS.rds")
+accuracy_RF_PS<-readRDS("models/CB/FTIR/accuracy_RF_PS.rds")
+predicted_RF_PS<-readRDS("models/CB/FTIR/predicted_RF_PS.rds")
+
+plot(predicted_RF_PS,tested_RF_PS,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Random Forests \nRMSE:",round(RMSE_RF_PS,digits = 2),"\nAccuracy :",round(accuracy_RF_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Polynomial Kernel for Pseudomonas count 
+
+```{r message = FALSE, warning = FALSE}
+model_SVMP_PS <- readRDS("models/CB/FTIR/model_SVMP_PS.rds")
+print(model_SVMP_PS)
+
+```
+
+# Pseudomonas count distribution - Support Vector Machines with Polynomial Kernel
+
+```{r echo=FALSE}
+tested_SVMP_PS<-readRDS("models/CB/FTIR/tested_SVMP_PS.rds")
+RMSE_SVMP_PS<-readRDS("models/CB/FTIR/RMSE_SVMP_PS.rds")
+accuracy_SVMP_PS<-readRDS("models/CB/FTIR/accuracy_SVMP_PS.rds")
+predicted_SVMP_PS<-readRDS("models/CB/FTIR/predicted_SVMP_PS.rds")
+
+plot(predicted_SVMP_PS,tested_SVMP_PS,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Polynomial Kernel \nRMSE:",round(RMSE_SVMP_PS,digits = 2),"\nAccuracy :",round(accuracy_SVMP_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Linear Kernel for Pseudomonas count 
+
+```{r message = FALSE, warning = FALSE}
+model_SVMLM_PS <- readRDS("models/CB/FTIR/model_SVMLM_PS.rds")
+print(model_SVMLM_PS)
+
+```
+
+# Pseudomonas count distribution - Support Vector Machines with Linear Kernel
+
+```{r echo=FALSE}
+tested_SVMLM_PS<-readRDS("models/CB/FTIR/tested_SVMLM_PS.rds")
+RMSE_SVMLM_PS<-readRDS("models/CB/FTIR/RMSE_SVMLM_PS.rds")
+accuracy_SVMLM_PS<-readRDS("models/CB/FTIR/accuracy_SVMLM_PS.rds")
+predicted_SVMLM_PS<-readRDS("models/CB/FTIR/predicted_SVMLM_PS.rds")
+
+plot(predicted_SVMLM_PS,tested_SVMLM_PS,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Linear Kernel \nRMSE:",round(RMSE_SVMLM_PS,digits = 2),"\nAccuracy :",round(accuracy_SVMLM_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+
+# Support Vector Machines with Radial Basis Function Kernel for Pseudomonas count
+
+```{r message = FALSE, warning = FALSE}
+
+model_SVMR_PS <-readRDS("models/CB/FTIR/model_SVMR_PS.rds")
+print(model_SVMR_PS)
+
+```
+
+# Pseudomonas count distribution - Support Vector Machines with Radial Basis Function Kernel
+
+```{r echo=FALSE}
+tested_SVMR_PS<-readRDS("models/CB/FTIR/tested_SVMR_PS.rds")
+RMSE_SVMR_PS<-readRDS("models/CB/FTIR/RMSE_SVMR_PS.rds")
+accuracy_SVMR_PS<-readRDS("models/CB/FTIR/accuracy_SVMR_PS.rds")
+predicted_SVMR_PS<-readRDS("models/CB/FTIR/predicted_SVMR_PS.rds")
+
+plot(predicted_SVMR_PS, tested_SVMR_PS,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Radial Basis Function Kernel \nRMSE:",round(RMSE_SVMR_PS,digits = 2),"\nAccuracy :",round(accuracy_SVMR_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# k-Nearest Neighbours for Brochothrix thermosphacta count
+
+```{r message=FALSE, warning=FALSE}
+
+model_knn_BRO <- readRDS("models/CB/FTIR/model_knn_BRO.rds")
+print(model_knn_BRO)
+```
+
+# Brochothrix thermosphacta count distribution - k-Nearest Neighbours
+
+```{r echo=FALSE}
+tested_knn_BRO<-readRDS("models/CB/FTIR/tested_knn_BRO.rds")
+RMSE_knn_BRO <- readRDS("models/CB/FTIR/RMSE_knn_BRO.rds")
+accuracy_knn_BRO <- readRDS("models/CB/FTIR/accuracy_knn_BRO.rds")
+predicted_knn_BRO <- readRDS("models/CB/FTIR/predicted_knn_BRO.rds")
+
+plot(predicted_knn_BRO,tested_knn_BRO,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts",col = "blue", 
+     main=paste("k-Nearest Neighbours \nRMSE:",round(RMSE_knn_BRO,digits = 2),"\nAccuracy :",round(accuracy_knn_BRO, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+```
+
+# Linear Model for Brochothrix thermosphacta count
+
+```{r message=FALSE, warning=FALSE}
+model_LM_BRO <- readRDS("models/CB/FTIR/model_LM_BRO.rds")
+print(model_LM_BRO)
+
+```
+
+# Brochothrix thermosphacta count distribution - Linear Regression
+
+```{r echo=FALSE}
+tested_LM_BRO<-readRDS("models/CB/FTIR/tested_LM_BRO.rds")
+RMSE_LM_BRO<-readRDS("models/CB/FTIR/RMSE_LM_BRO.rds")
+accuracy_LM_BRO<-readRDS("models/CB/FTIR/accuracy_LM_BRO.rds")
+predicted_LM_BRO<-readRDS("models/CB/FTIR/predicted_LM_BRO.rds")
+
+plot(predicted_LM_BRO, tested_LM_BRO,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Linear Regression \nRMSE:",round(RMSE_LM_BRO,digits = 2),"\nAccuracy:",round(accuracy_LM_BRO, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Random Forest for Brochothrix thermosphacta count
+
+```{r message=FALSE, warning=FALSE}
+model_RF_BRO <- readRDS("models/CB/FTIR/model_RF_BRO.rds")
+print(model_RF_BRO)
+
+```
+
+# Brochothrix thermosphacta count distribution - Random Forests
+
+```{r echo=FALSE}
+tested_RF_BRO<-readRDS("models/CB/FTIR/tested_RF_BRO.rds")
+RMSE_RF_BRO<-readRDS("models/CB/FTIR/RMSE_RF_BRO.rds")
+accuracy_RF_BRO<-readRDS("models/CB/FTIR/accuracy_RF_BRO.rds")
+predicted_RF_BRO<-readRDS("models/CB/FTIR/predicted_RF_BRO.rds")
+
+plot(predicted_RF_BRO, tested_RF_BRO,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Random Forests \nRMSE:",round(RMSE_RF_BRO,digits = 2),"\nAccuracy :",round(accuracy_RF_BRO, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Polynomial Kernel for Brochothrix thermosphacta count
+
+```{r message = FALSE, warning = FALSE}
+model_SVMP_BRO <- readRDS("models/CB/FTIR/model_SVMP_BRO.rds")
+print(model_SVMP_BRO)
+
+```
+
+# Brochothrix thermosphacta count distribution - Support Vector Machines with Polynomial Kernel
+
+```{r echo=FALSE}
+tested_SVMP_BRO<-readRDS("models/CB/FTIR/tested_SVMP_BRO.rds")
+RMSE_SVMP_BRO<-readRDS("models/CB/FTIR/RMSE_SVMP_BRO.rds")
+accuracy_SVMP_BRO<-readRDS("models/CB/FTIR/accuracy_SVMP_BRO.rds")
+predicted_SVMP_BRO<-readRDS("models/CB/FTIR/predicted_SVMP_BRO.rds")
+
+plot(predicted_SVMP_BRO,tested_SVMP_BRO,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Polynomial Kernel \nRMSE:",round(RMSE_SVMP_BRO,digits = 2)," \nAccuracy :",round(accuracy_SVMP_BRO, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Radial Basis Function Kernel for Brochothrix thermosphacta count
+
+```{r message = FALSE, warning = FALSE}
+model_SVMR_BRO <-readRDS("models/CB/FTIR/model_SVMR_BRO.rds")
+print(model_SVMR_BRO)
+
+```
+
+# Brochothrix thermosphacta count distribution - Support Vector Machines with Radial Basis Function Kernel
+
+```{r echo=FALSE}
+tested_SVMR_BRO<-readRDS("models/CB/FTIR/tested_SVMR_BRO.rds")
+RMSE_SVMR_BRO<-readRDS("models/CB/FTIR/RMSE_SVMR_BRO.rds")
+accuracy_SVMR_BRO<-readRDS("models/CB/FTIR/accuracy_SVMR_BRO.rds")
+predicted_SVMR_BRO<-readRDS("models/CB/FTIR/predicted_SVMR_BRO.rds")
+
+plot(predicted_SVMR_BRO,tested_SVMR_BRO,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Radial Basis Function Kernel \nRMSE:",round(RMSE_SVMR_BRO,digits = 2)," \nAccuracy :",round(accuracy_SVMR_BRO, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Linear Kernel for Brochothrix thermosphacta count
+
+```{r message = FALSE, warning = FALSE}
+model_SVMLM_BRO <- readRDS("models/CB/FTIR/model_SVMLM_BRO.rds")
+print(model_SVMLM_BRO)
+
+```
+
+# Brochothrix thermosphacta count distribution - Support Vector Machines with Linear Kernel
+
+```{r echo=FALSE}
+tested_SVMLM_BRO<-readRDS("models/CB/FTIR/tested_SVMLM_BRO.rds")
+RMSE_SVMLM_BRO<-readRDS("models/CB/FTIR/RMSE_SVMLM_BRO.rds")
+accuracy_SVMLM_BRO<-readRDS("models/CB/FTIR/accuracy_SVMLM_BRO.rds")
+predicted_SVMLM_BRO<-readRDS("models/CB/FTIR/predicted_SVMLM_BRO.rds")
+
+plot(predicted_SVMLM_BRO,tested_SVMLM_BRO, xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Linear Kernel \nRMSE:",round(RMSE_SVMLM_BRO,digits = 2), "\nAccuracy:",round(accuracy_SVMLM_BRO,digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Linear Regression for Lactic acid bacteria count 
+
+```{r message = FALSE, warning = FALSE}
+model_LM_LAB <- readRDS("models/CB/FTIR/model_LM_LAB.rds")
+print(model_LM_LAB)
+
+```
+
+# Lactic acid bacteria count distribution - Linear Regression
+
+```{r echo=FALSE}
+tested_LM_LAB<-readRDS("models/CB/FTIR/tested_LM_LAB.rds")
+RMSE_LM_LAB<-readRDS("models/CB/FTIR/RMSE_LM_LAB.rds")
+accuracy_LM_LAB<-readRDS("models/CB/FTIR/accuracy_LM_LAB.rds")
+predicted_LM_LAB<-readRDS("models/CB/FTIR/predicted_LM_LAB.rds")
+
+plot(predicted_LM_LAB, tested_LM_LAB,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Linear Regression \nRMSE:", round(RMSE_LM_LAB,digits = 2),"\nAccuracy :",round(accuracy_LM_LAB, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# k-Nearest Neighbors for Lactic acid bacteria count 
+
+```{r message = FALSE, warning = FALSE}
+model_knn_LAB <- readRDS("models/CB/FTIR/model_knn_LAB.rds")
+print(model_knn_LAB)
+
+```
+
+# Lactic acid bacteria count distribution - k-Nearest Neighbors
+
+```{r echo=FALSE}
+tested_knn_LAB<-readRDS("models/CB/FTIR/tested_knn_LAB.rds")
+RMSE_knn_LAB<-readRDS("models/CB/FTIR/RMSE_knn_LAB.rds")
+accuracy_knn_LAB<-readRDS("models/CB/FTIR/accuracy_knn_LAB.rds")
+predicted_knn_LAB<-readRDS("models/CB/FTIR/predicted_knn_LAB.rds")
+
+plot(predicted_knn_LAB, tested_knn_LAB,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("k-Nearest Neighbors \nRMSE:",round(RMSE_knn_LAB,digits = 2),"\nAccuracy :",round(accuracy_knn_LAB, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Random Forests for Lactic acid bacteria count  
+
+```{r message = FALSE, warning = FALSE}
+model_RF_LAB <- readRDS("models/CB/FTIR/model_RF_LAB.rds")
+print(model_RF_LAB)
+
+```
+
+# Lactic acid bacteria count distribution - Random Forests
+
+```{r echo=FALSE}
+tested_RF_LAB<-readRDS("models/CB/FTIR/tested_RF_LAB.rds")
+RMSE_RF_LAB<-readRDS("models/CB/FTIR/RMSE_RF_LAB.rds")
+accuracy_RF_LAB<-readRDS("models/CB/FTIR/accuracy_RF_LAB.rds")
+predicted_RF_LAB<-readRDS("models/CB/FTIR/predicted_RF_LAB.rds")
+
+plot(predicted_RF_LAB,tested_RF_LAB,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Random Forests \nRMSE:",round(RMSE_RF_LAB,digits = 2),"\nAccuracy :",round(accuracy_RF_LAB, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Polynomial Kernel for Lactic acid bacteria count 
+
+```{r message = FALSE, warning = FALSE}
+model_SVMP_LAB <- readRDS("models/CB/FTIR/model_SVMP_LAB.rds")
+print(model_SVMP_LAB)
+
+```
+
+# Lactic acid bacteria count distribution - Support Vector Machines with Polynomial Kernel
+
+```{r echo=FALSE}
+tested_SVMP_LAB<-readRDS("models/CB/FTIR/tested_SVMP_LAB.rds")
+RMSE_SVMP_LAB<-readRDS("models/CB/FTIR/RMSE_SVMP_LAB.rds")
+accuracy_SVMP_LAB<-readRDS("models/CB/FTIR/accuracy_SVMP_LAB.rds")
+predicted_SVMP_LAB<-readRDS("models/CB/FTIR/predicted_SVMP_LAB.rds")
+
+plot(predicted_SVMP_LAB,tested_SVMP_LAB,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Polynomial Kernel \nRMSE:",round(RMSE_SVMP_LAB,digits = 2),"\nAccuracy :",round(accuracy_SVMP_LAB, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Linear Kernel for Lactic acid bacteria count 
+
+```{r message = FALSE, warning = FALSE}
+model_SVMLM_LAB <- readRDS("models/CB/FTIR/model_SVMLM_LAB.rds")
+print(model_SVMLM_LAB)
+
+```
+
+# Lactic acid bacteria count distribution - Support Vector Machines with Linear Kernel
+
+```{r echo=FALSE}
+tested_SVMLM_PS<-readRDS("models/CB/FTIR/tested_SVMLM_PS.rds")
+RMSE_SVMLM_PS<-readRDS("models/CB/FTIR/RMSE_SVMLM_PS.rds")
+accuracy_SVMLM_PS<-readRDS("models/CB/FTIR/accuracy_SVMLM_PS.rds")
+predicted_SVMLM_PS<-readRDS("models/CB/FTIR/predicted_SVMLM_PS.rds")
+
+plot(predicted_SVMLM_PS,tested_SVMLM_PS,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Linear Kernel \nRMSE:",round(RMSE_SVMLM_PS,digits = 2),"\nAccuracy :",round(accuracy_SVMLM_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+
+# Support Vector Machines with Radial Basis Function Kernel for Lactic acid bacteria count
+
+```{r message = FALSE, warning = FALSE}
+
+model_SVMR_LAB <-readRDS("models/CB/FTIR/model_SVMR_LAB.rds")
+print(model_SVMR_LAB)
+
+```
+
+# Lactic acid bacteria count distribution - Support Vector Machines with Radial Basis Function Kernel
+
+```{r echo=FALSE}
+tested_SVMR_LAB<-readRDS("models/CB/FTIR/tested_SVMR_LAB.rds")
+RMSE_SVMR_LAB<-readRDS("models/CB/FTIR/RMSE_SVMR_LAB.rds")
+accuracy_SVMR_LAB<-readRDS("models/CB/FTIR/accuracy_SVMR_LAB.rds")
+predicted_SVMR_LAB<-readRDS("models/CB/FTIR/predicted_SVMR_LAB.rds")
+
+plot(predicted_SVMR_LAB, tested_SVMR_LAB,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Radial Basis Function Kernel \nRMSE:",round(RMSE_SVMR_LAB,digits = 2),"\nAccuracy :",round(accuracy_SVMR_LAB, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+

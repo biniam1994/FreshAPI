@@ -1,0 +1,298 @@
+---
+title: "Machine Learning Regression Model Report - Multispectral imaging"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# k-Nearest Neighbours for Total Viable Counts
+
+```{r message=FALSE, warning=FALSE}
+
+model.knn_TVC <- readRDS("models/CTF/MSI/Model.MSI_KNN_TVC.rds")
+print(model.knn_TVC)
+```
+
+# Total Viable Counts distribution - k-Nearest Neighbours
+
+```{r echo=FALSE}
+test.knn<-readRDS("models/CTF/MSI/Test_MSI_TVC.rds")
+RMSE.knn <- readRDS("models/CTF/MSI/RMSE.MSI_knn_TVC.rds")
+accuracy_knn_TVC <- readRDS("models/CTF/MSI/Accuracy.MSI_knn_TVC.rds")
+predicted.knn <- readRDS("models/CTF/MSI/Prediction.MSI_knn_TVC.rds")
+
+plot(predicted.knn,test.knn,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts",col = "blue", 
+     main=paste("k-Nearest Neighbours \nRMSE:",round(RMSE.knn,digits = 2),"\nAccuracy :",round(accuracy_knn_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+```
+
+# Linear Model for Total Viable Counts
+
+```{r message=FALSE, warning=FALSE}
+model.lm_TVC <- readRDS("models/CTF/MSI/Model.MSI_LM_TVC.rds")
+print(model.lm_TVC)
+
+```
+
+# Total Viable Counts distribution - Linear Regression
+
+```{r echo=FALSE}
+test.lm<-readRDS("models/CTF/MSI/Test_MSI_TVC.rds")
+RMSE.lm.TVC<-readRDS("models/CTF/MSI/RMSE.MSI_LM_TVC.rds")
+accuracy_lm_TVC<-readRDS("models/CTF/MSI/Accuracy.MSI_LM_TVC.rds")
+predicted.lm<-readRDS("models/CTF/MSI/Prediction.MSI_LM_TVC.rds")
+
+plot(predicted.lm, test.lm,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Linear Regression \nRMSE:",round(RMSE.lm.TVC,digits = 2),"\nAccuracy:",round(accuracy_lm_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Random Forest for Total Viable Counts
+
+```{r message=FALSE, warning=FALSE}
+model.rf_TVC <- readRDS("models/CTF/MSI/Model.MSI_RF_TVC.rds")
+print(model.rf_TVC)
+
+```
+
+# Total Viable Counts distribution - Random Forests
+
+```{r echo=FALSE}
+test.rf<-readRDS("models/CTF/MSI/Test_MSI_TVC.rds")
+RMSE.rf<-readRDS("models/CTF/MSI/RMSE.MSI_RF_TVC.rds")
+accuracy_RF_TVC<-readRDS("models/CTF/MSI/Accuracy.MSI_RF_TVC.rds")
+predicted.rf<-readRDS("models/CTF/MSI/Prediction.MSI_RF_TVC.rds")
+
+plot(predicted.rf, test.rf,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Random Forests \nRMSE:",round(RMSE.rf,digits = 2),"\nAccuracy :",round(accuracy_RF_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Polynomial Kernel for Total Viable Counts
+
+```{r message = FALSE, warning = FALSE}
+model.svmPoly_TVC <- readRDS("models/CTF/MSI/Model.MSI_SVMPoly_TVC.rds")
+print(model.svmPoly_TVC)
+
+```
+
+# Total Viable Counts distribution - Support Vector Machines with Polynomial Kernel
+
+```{r echo=FALSE}
+test.svmPoly<-readRDS("models/CTF/MSI/Test_MSI_TVC.rds")
+RMSE.SVMP<-readRDS("models/CTF/MSI/RMSE.MSI_SVMPoly_TVC.rds")
+accuracy_SVMP_TVC<-readRDS("models/CTF/MSI/Accuracy.MSI_SVMPoly_TVC.rds")
+predicted.SVMP<-readRDS("models/CTF/MSI/Prediction.MSI_SVMPoly_TVC.rds")
+
+plot(predicted.SVMP,test.svmPoly,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Polynomial Kernel \nRMSE:",round(RMSE.SVMP,digits = 2)," \nAccuracy :",round(accuracy_SVMP_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Radial Basis Function Kernel for Total Viable Counts
+
+```{r message = FALSE, warning = FALSE}
+model.svmrad_TVC <-readRDS("models/CTF/MSI/Model.MSI_SVMRadial_TVC.rds")
+print(model.svmrad_TVC)
+
+```
+
+# Total Viable Counts distribution - Support Vector Machines with Radial Basis Function Kernel
+
+```{r echo=FALSE}
+test.svmRadial<-readRDS("models/CTF/MSI/Test_MSI_TVC.rds")
+RMSE.SVMR.TVC<-readRDS("models/CTF/MSI/RMSE.MSI_SVMRadial_TVC.rds")
+accuracy_SVMRAD_TVC<-readRDS("models/CTF/MSI/Accuracy.MSI_SVMRadial_TVC.rds")
+y_pred<-readRDS("models/CTF/MSI/Prediction.MSI_SVMRadial_TVC.rds")
+
+plot(y_pred,test.svmRadial,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Radial Basis Function Kernel \nRMSE:",round(RMSE.SVMR.TVC,digits = 2)," \nAccuracy :",round(accuracy_SVMRAD_TVC, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Linear Kernel for Total Viable Counts
+
+```{r message = FALSE, warning = FALSE}
+model.svmLM_TVC <- readRDS("models/CTF/MSI/Model.MSI_SVMlinear_TVC.rds")
+print(model.svmLM_TVC)
+
+```
+
+# Total Viable Counts distribution - Support Vector Machines with Linear Kernel
+
+```{r echo=FALSE}
+test.svmLinear<-readRDS("models/CTF/MSI/Test_MSI_TVC.rds")
+RMSE.SVMLM.TVC<-readRDS("models/CTF/MSI/RMSE.MSI_SVMlinear_TVC.rds")
+accuracy_SVMLM_TVC<-readRDS("models/CTF/MSI/Accuracy.MSI_SVMlinear_TVC.rds")
+predicted.SVMLM.TVC<-readRDS("models/CTF/MSI/Prediction.MSI_SVMlinear_TVC.rds")
+
+plot(predicted.SVMLM.TVC,test.svmLinear, xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Linear Kernel \nRMSE:",round(RMSE.SVMLM.TVC,digits = 2), "\nAccuracy:",round(accuracy_SVMLM_TVC,digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Linear Regression for Pseudomonas count 
+
+```{r message = FALSE, warning = FALSE}
+model.lm_Ps <- readRDS("models/CTF/MSI/Model.MSI_LM_Pseudomonas.rds")
+print(model.lm_Ps)
+
+```
+
+# Pseudomonas count distribution - Linear Regression
+
+```{r echo=FALSE}
+test.lm.ps<-readRDS("models/CTF/MSI/Test_MSI_Pseudomonas.rds")
+RMSE.lm.ps<-readRDS("models/CTF/MSI/RMSE.MSI_LM_Pseudomonas.rds")
+accuracy_lm_PS<-readRDS("models/CTF/MSI/Accuracy.MSI_LM_Pseudomonas.rds")
+predicted.lm.ps<-readRDS("models/CTF/MSI/Prediction.MSI_LM_Pseudomonas.rds")
+
+plot(predicted.lm.ps, test.lm.ps,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Linear Regression \nRMSE:", round(RMSE.lm.ps,digits = 2),"\nAccuracy :",round(accuracy_lm_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# k-Nearest Neighbors for Pseudomonas count 
+
+```{r message = FALSE, warning = FALSE}
+model.knn_Ps <- readRDS("models/CTF/MSI/Model.MSI_knn_Pseudomonas.rds")
+print(model.knn_Ps)
+
+```
+
+# Pseudomonas count distribution - k-Nearest Neighbors
+
+```{r echo=FALSE}
+test.knn.ps<-readRDS("models/CTF/MSI/Test_MSI_Pseudomonas.rds")
+RMSE.knn.ps<-readRDS("models/CTF/MSI/RMSE.MSI_knn_Pseudomonas.rds")
+accuracy_knn_PS<-readRDS("models/CTF/MSI/Accuracy.MSI_knn_Pseudomonas.rds")
+predicted.knn.ps<-readRDS("models/CTF/MSI/Prediction.MSI_knn_Pseudomonas.rds")
+
+plot(predicted.knn.ps, test.knn.ps,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("k-Nearest Neighbors \nRMSE:",round(RMSE.knn.ps,digits = 2),"\nAccuracy :",round(accuracy_knn_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Random Forests for Pseudomonas count  
+
+```{r message = FALSE, warning = FALSE}
+model.rf_Ps <- readRDS("models/CTF/MSI/Model.MSI_RF_Pseudomonas.rds")
+print(model.rf_Ps)
+
+```
+
+# Pseudomonas count distribution - Random Forests
+
+```{r echo=FALSE}
+test.rf.ps<-readRDS("models/CTF/MSI/Test_MSI_Pseudomonas.rds")
+RMSE.rf.ps<-readRDS("models/CTF/MSI/RMSE.MSI_RF_Pseudomonas.rds")
+accuracy_RF_PS<-readRDS("models/CTF/MSI/Accuracy.MSI_RF_Pseudomonas.rds")
+predicted.rf.ps<-readRDS("models/CTF/MSI/Prediction.MSI_RF_Pseudomonas.rds")
+
+plot(predicted.rf.ps,test.rf.ps,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Random Forests \nRMSE:",round(RMSE.rf.ps,digits = 2),"\nAccuracy :",round(accuracy_RF_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Polynomial Kernel for Pseudomonas count 
+
+```{r message = FALSE, warning = FALSE}
+model.svmPoly_Ps <- readRDS("models/CTF/MSI/Model.MSI_SVMPoly_Pseudomonas.rds")
+print(model.svmPoly_Ps)
+
+```
+
+# Pseudomonas count distribution - Support Vector Machines with Polynomial Kernel
+
+```{r echo=FALSE}
+test.svmPoly.ps<-readRDS("models/CTF/MSI/Test_MSI_Pseudomonas.rds")
+RMSE.SVMP.ps<-readRDS("models/CTF/MSI/RMSE.MSI_SVMPoly_Pseudomonas.rds")
+accuracy_SVMP_PS<-readRDS("models/CTF/MSI/Accuracy.MSI_SVMPoly_Pseudomonas.rds")
+predicted.SVMP.PS<-readRDS("models/CTF/MSI/Prediction.MSI_SVMPoly_Pseudomonas.rds")
+
+plot(predicted.SVMP.PS,test.svmPoly.ps,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Polynomial Kernel \nRMSE:",round(RMSE.SVMP.ps,digits = 2),"\nAccuracy :",round(accuracy_SVMP_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+# Support Vector Machines with Linear Kernel for Pseudomonas count 
+
+```{r message = FALSE, warning = FALSE}
+model.svmLM_Ps <- readRDS("models/CTF/MSI/Model.MSI_SVMlinear_Pseudomonas.rds")
+print(model.svmLM_Ps)
+
+```
+
+# Pseudomonas count distribution - Support Vector Machines with Linear Kernel
+
+```{r echo=FALSE}
+test.svmLinear.ps<-readRDS("models/CTF/MSI/Test_MSI_Pseudomonas.rds")
+RMSE.SVMLM.ps<-readRDS("models/CTF/MSI/RMSE.MSI_SVMlinear_Pseudomonas.rds")
+accuracy_SVMLM_PS<-readRDS("models/CTF/MSI/Accuracy.MSI_SVMlinear_Pseudomonas.rds")
+predicted.SVMLM.PS<-readRDS("models/CTF/MSI/Prediction.MSI_SVMlinear_Pseudomonas.rds")
+
+plot(predicted.SVMLM.PS,test.svmLinear.ps,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Linear Kernel \nRMSE:",round(RMSE.SVMLM.ps,digits = 2),"\nAccuracy :",round(accuracy_SVMLM_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+
+
+# Support Vector Machines with Radial Basis Function Kernel for Pseudomonas count
+
+```{r message = FALSE, warning = FALSE}
+
+model.svmrad_Ps <-readRDS("models/CTF/MSI/Model.MSI_SVMRadial_Pseudomonas.rds")
+print(model.svmrad_Ps)
+
+```
+
+# Pseudomonas count distribution - Support Vector Machines with Radial Basis Function Kernel
+
+```{r echo=FALSE}
+test.svmRadial.ps<-readRDS("models/CTF/MSI/Test_MSI_Pseudomonas.rds")
+RMSE.SVMR.ps<-readRDS("models/CTF/MSI/RMSE.MSI_SVMRadial_Pseudomonas.rds")
+accuracy_SVMRAD_PS<-readRDS("models/CTF/MSI/Accuracy.MSI_SVMRadial_Pseudomonas.rds")
+y_pred.ps<-readRDS("models/CTF/MSI/Prediction.MSI_SVMRadial_Pseudomonas.rds")
+
+plot(y_pred.ps, test.svmRadial.ps,xlim= c(0,9), ylim=c(0,9),xlab="Predicted bacterial counts",ylab="Actual bacterial counts", col="blue",
+     main=paste("Support Vector Machines with Radial Basis Function Kernel \nRMSE:",round(RMSE.SVMR.ps,digits = 2),"\nAccuracy :",round(accuracy_SVMRAD_PS, digits = 2),"% - at ±1 LogCount"))
+abline(a=0,b=1)
+abline(a=-1,b=1)
+abline(a=1,b=1)
+
+```
+

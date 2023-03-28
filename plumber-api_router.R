@@ -1,0 +1,7 @@
+library(plumber)
+library(rmarkdown)
+library(tinytex)
+library(prospectr)
+library(readxl)
+r <- plumb("plumber-api.R")
+r$run(port=8080, host="0.0.0.0")
